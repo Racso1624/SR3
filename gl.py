@@ -111,7 +111,7 @@ class Render(object):
 
         y = y0
 
-        for x in range(x0, x1):
+        for x in range(x0, x1 + 1):
             if steep:
                 self.glPoint(x, y, line_color)
             else:
@@ -147,10 +147,10 @@ class Render(object):
                 v3 = self.transform_vertex(model.vertices[f3], translate, scale)
                 v4 = self.transform_vertex(model.vertices[f4], translate, scale)
 
-                self.glLine(v1[0], v1[1], v2[0], v2[1])
-                self.glLine(v2[0], v2[1], v3[0], v3[1])
-                self.glLine(v3[0], v3[1], v4[0], v4[1])
-                self.glLine(v4[0], v4[1], v1[0], v1[1])
+                self.glLine(v1[0], v2[0], v1[1], v2[1])
+                self.glLine(v2[0], v3[0], v2[1], v3[1])
+                self.glLine(v3[0], v4[0], v3[1], v4[1])
+                self.glLine(v4[0], v1[0], v4[1], v1[1])
             
             elif vcount == 3:
                 f1 = face[0][0] - 1
@@ -161,9 +161,9 @@ class Render(object):
                 v2 = self.transform_vertex(model.vertices[f2], translate, scale)
                 v3 = self.transform_vertex(model.vertices[f3], translate, scale)
 
-                self.glLine(v1[0], v1[1], v2[0], v2[1])
-                self.glLine(v2[0], v2[1], v3[0], v3[1])
-                self.glLine(v3[0], v3[1], v1[0], v1[1])
+                self.glLine(v1[0], v2[0], v1[1], v2[1])
+                self.glLine(v2[0], v3[0], v2[1], v3[1])
+                self.glLine(v3[0], v1[0], v3[1], v1[1])
 
     def glFinish(self, filename):
         f = open(filename, 'bw')
