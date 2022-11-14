@@ -15,6 +15,6 @@ r.glColor(0, 0, 0)
 
 r.glClear()
 
-r.load('./cup.obj', translate=[512, 512], scale=[50, 50])
+r.load('./cup.obj', translate=[512, 512], scale=[3, 3])
 
 r.glFinish("sr3.bmp")
