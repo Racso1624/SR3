@@ -4,6 +4,7 @@
 #SR3
 
 import struct
+from obj import *
 
 def char(c):
     #1 byte
@@ -115,6 +116,31 @@ class Render(object):
             if offset >= threshold:
                 y += 1 if y0 < y1 else -1
                 threshold += dx * 2
+
+    def load(self, filename, translate, scale):
+        model = Obj(filename)
+
+
+        for face in model.faces:
+            vcount = len(face)
+            
+            for j in range(vcount):
+                vi1 = face[j][0] 
+                vi2 = face[(j + 1) % vcount][0]
+
+                v1 = model.vertices[vi1 - 1]
+                v2 = model.vertices[vi2 - 1]
+
+                #print(v1, v2)
+
+                x1 = round((v1[0] + translate[0]) * scale[0])
+                x2 = round((v1[1] + translate[1]) * scale[1])
+                y1 = round((v2[0] + translate[0]) * scale[0])
+                y2 = round((v2[1] + translate[1]) * scale[1])
+
+                #print(x1, x2, y1, y2)
+
+                self.glLine(x1, x2, y1, y2)
 
 
     def glFinish(self, filename):
